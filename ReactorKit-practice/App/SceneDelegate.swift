@@ -7,22 +7,28 @@
 
 import UIKit
 
+import Swinject
+
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-    var mainCoodinator: MainCoodinator?
+    private var mainCoodinator: MainCoodinator?
+    private var injector: Injector = DependencyInjector(container: Container())
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
-        
         let navigationController = UINavigationController()
-        mainCoodinator = MainCoodinator(navigationController: navigationController)
-        mainCoodinator?.start()
-        
         window = UIWindow(windowScene: windowScene)
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
+        
+        mainCoodinator = MainCoodinator(navigationController: navigationController)
+        
+        // Assembly 들을 모아서 앱 실행 시작 시점에 함께 등록
+        injector.assemble([HomeAssembly()])
+        mainCoodinator?.start()
+        
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
