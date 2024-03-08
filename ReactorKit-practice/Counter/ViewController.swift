@@ -12,6 +12,8 @@ import RxSwift
 import ReactorKit
 
 final class ViewController: UIViewController, View {
+    
+    weak var coordinator: MainCoodinator?
     var disposeBag = DisposeBag()
     
     private let countLabel: UILabel = {
@@ -26,6 +28,12 @@ final class ViewController: UIViewController, View {
         increaseButton.translatesAutoresizingMaskIntoConstraints = false
         increaseButton.setTitle("Increase", for: .normal)
         return increaseButton
+    }()
+    private let pushButton: UIButton = {
+        let pushButton = UIButton()
+        pushButton.translatesAutoresizingMaskIntoConstraints = false
+        pushButton.setTitle("gogogo", for: .normal)
+        return pushButton
     }()
 
     override func viewDidLoad() {
@@ -57,6 +65,13 @@ final class ViewController: UIViewController, View {
             .map { Reactor.Action.increase }
             .bind(to: reactor.action)
             .disposed(by: disposeBag)
+        
+        pushButton.rx.tap
+            .asSignal()
+            .emit(with: self) { owner, _ in
+                owner.coordinator?.pushSecond()
+            }
+            .disposed(by: disposeBag)
     }
     
     private func bindState(_ reactor: ViewReactor) {
@@ -71,12 +86,16 @@ final class ViewController: UIViewController, View {
     func setLayout() {
         view.addSubview(countLabel)
         view.addSubview(increaseButton)
+        view.addSubview(pushButton)
         
         NSLayoutConstraint.activate([
             countLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             countLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50),
             increaseButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            increaseButton.topAnchor.constraint(equalTo: countLabel.bottomAnchor, constant: 20)
+            increaseButton.topAnchor.constraint(equalTo: countLabel.bottomAnchor, constant: 20),
+            
+            pushButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            pushButton.topAnchor.constraint(equalTo: increaseButton.bottomAnchor, constant: 20)
         ])
     }
 }

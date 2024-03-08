@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		220A5B402B9AAC360029D018 /* MainCoodinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220A5B3F2B9AAC360029D018 /* MainCoodinator.swift */; };
+		220A5B422B9AB00B0029D018 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220A5B412B9AB00B0029D018 /* SecondViewController.swift */; };
+		220A5B442B9AB1290029D018 /* SecondViewCoodinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220A5B432B9AB1290029D018 /* SecondViewCoodinator.swift */; };
 		22DD3B222B6F8708004C6768 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DD3B212B6F8708004C6768 /* AppDelegate.swift */; };
 		22DD3B242B6F8708004C6768 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DD3B232B6F8708004C6768 /* SceneDelegate.swift */; };
 		22DD3B262B6F8708004C6768 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DD3B252B6F8708004C6768 /* ViewController.swift */; };
@@ -41,6 +44,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		220A5B3F2B9AAC360029D018 /* MainCoodinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoodinator.swift; sourceTree = "<group>"; };
+		220A5B412B9AB00B0029D018 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
+		220A5B432B9AB1290029D018 /* SecondViewCoodinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewCoodinator.swift; sourceTree = "<group>"; };
 		22DD3B1E2B6F8708004C6768 /* ReactorKit-practice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ReactorKit-practice.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		22DD3B212B6F8708004C6768 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		22DD3B232B6F8708004C6768 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -86,6 +92,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		220A5B3E2B9AAC190029D018 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				22DD3B212B6F8708004C6768 /* AppDelegate.swift */,
+				22DD3B232B6F8708004C6768 /* SceneDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
 		22DD3B152B6F8708004C6768 = {
 			isa = PBXGroup;
 			children = (
@@ -109,9 +124,8 @@
 		22DD3B202B6F8708004C6768 /* ReactorKit-practice */ = {
 			isa = PBXGroup;
 			children = (
+				220A5B3E2B9AAC190029D018 /* App */,
 				22DD3B5F2B6F9769004C6768 /* Counter */,
-				22DD3B212B6F8708004C6768 /* AppDelegate.swift */,
-				22DD3B232B6F8708004C6768 /* SceneDelegate.swift */,
 				22DD3B2A2B6F8709004C6768 /* Assets.xcassets */,
 				22DD3B2C2B6F8709004C6768 /* LaunchScreen.storyboard */,
 				22DD3B2F2B6F8709004C6768 /* Info.plist */,
@@ -139,8 +153,11 @@
 		22DD3B5F2B6F9769004C6768 /* Counter */ = {
 			isa = PBXGroup;
 			children = (
+				220A5B3F2B9AAC360029D018 /* MainCoodinator.swift */,
 				22DD3B252B6F8708004C6768 /* ViewController.swift */,
 				22DD3B542B6F8D2B004C6768 /* ViewReactor.swift */,
+				220A5B412B9AB00B0029D018 /* SecondViewController.swift */,
+				220A5B432B9AB1290029D018 /* SecondViewCoodinator.swift */,
 			);
 			path = Counter;
 			sourceTree = "<group>";
@@ -286,7 +303,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				220A5B442B9AB1290029D018 /* SecondViewCoodinator.swift in Sources */,
+				220A5B422B9AB00B0029D018 /* SecondViewController.swift in Sources */,
 				22DD3B262B6F8708004C6768 /* ViewController.swift in Sources */,
+				220A5B402B9AAC360029D018 /* MainCoodinator.swift in Sources */,
 				22DD3B222B6F8708004C6768 /* AppDelegate.swift in Sources */,
 				22DD3B242B6F8708004C6768 /* SceneDelegate.swift in Sources */,
 				22DD3B552B6F8D2B004C6768 /* ViewReactor.swift in Sources */,
