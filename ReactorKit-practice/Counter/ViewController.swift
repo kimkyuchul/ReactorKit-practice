@@ -13,7 +13,7 @@ import ReactorKit
 
 final class ViewController: UIViewController, View {
     
-    weak var coordinator: MainCoodinator?
+    weak var coordinator: HomeCoodinator?
     var disposeBag = DisposeBag()
     
     private let countLabel: UILabel = {
@@ -44,6 +44,11 @@ final class ViewController: UIViewController, View {
 //        bind(reactor: ViewReactor())
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        print(coordinator?.childCoodinators.count)
+    }
+    
     // Reactor에 View의 Action을 미리 정의해놓고, 해당 action을 처리하여 다시 View에 State값을 넘기는 것
     // View에서는 인터렉터 이벤트들을 Reactor의 Action값으로 넘기고, reactor의 state값을 구독하고 UI업데이트 하는 것
     func bind(reactor: ViewReactor) {
@@ -69,7 +74,7 @@ final class ViewController: UIViewController, View {
         pushButton.rx.tap
             .asSignal()
             .emit(with: self) { owner, _ in
-                owner.coordinator?.pushSecond()
+                owner.coordinator?.showSecond()
             }
             .disposed(by: disposeBag)
     }

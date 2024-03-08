@@ -12,7 +12,7 @@ import Swinject
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-    private var mainCoodinator: MainCoodinator?
+    private var appCoodinator: DefaultAppCoodinator?
     private var injector: Injector = DependencyInjector(container: Container())
 
 
@@ -23,11 +23,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
         
-        mainCoodinator = MainCoodinator(navigationController: navigationController)
+        appCoodinator = DefaultAppCoodinator(dependency: .init(navigationController: navigationController, injector: injector))
         
         // Assembly 들을 모아서 앱 실행 시작 시점에 함께 등록
         injector.assemble([HomeAssembly()])
-        mainCoodinator?.start()
+        appCoodinator?.start()
         
     }
 
