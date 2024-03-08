@@ -2,7 +2,7 @@
 //  SecondViewCoodinator.swift
 //  ReactorKit-practice
 //
-//  Created by Kooky macBook Air on 3/8/24.
+//  Created by test macBook Air on 3/8/24.
 //
 
 import UIKit
