@@ -39,14 +39,11 @@ final class ViewController: UIViewController, View {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemMint
-        self.reactor = ViewReactor()
         setLayout()
-//        bind(reactor: ViewReactor())
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print(coordinator?.childCoodinators.count)
     }
     
     // Reactor에 View의 Action을 미리 정의해놓고, 해당 action을 처리하여 다시 View에 State값을 넘기는 것

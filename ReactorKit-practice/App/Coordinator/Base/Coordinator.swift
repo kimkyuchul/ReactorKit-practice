@@ -8,9 +8,9 @@
 import UIKit
 
 enum CoordinatorType {
-    case app
-    case home
-    case second
+    case app, tabBar
+    case home, second
+    case search
 }
 
 protocol Coodinator: AnyObject {

@@ -30,6 +30,10 @@ final class DefaultAppCoodinator: AppCoordinator {
         self.navigationController = dependency.navigationController
     }
     
+    deinit {
+        debugPrint("deinit: \(self)")
+    }
+    
     func start() {
         setHomeCoordinator()
         showHomeFlow()
@@ -37,10 +41,10 @@ final class DefaultAppCoodinator: AppCoordinator {
     
     // 탭바 플로우
     func showHomeFlow() {
-        if getChildCoordinator(.home) == nil { setHomeCoordinator() }
-        let homeCoordinator = getChildCoordinator(.home) as! HomeCoodinator
-        homeCoordinator.finishDelegate = self
-        homeCoordinator.start()
+        if getChildCoordinator(.tabBar) == nil { setHomeCoordinator() }
+        let tabBarCoordinator = getChildCoordinator(.tabBar) as! TabBarCoordinator
+        tabBarCoordinator.finishDelegate = self
+        tabBarCoordinator.start()
     }
     
     // 로그인 플로우
@@ -49,22 +53,22 @@ final class DefaultAppCoodinator: AppCoordinator {
     }
     
     func setHomeCoordinator() {
-        let dependency = HomeCoodinator.Dependency(
+        let dependency = TabBarCoordinator.Dependency(
           navigationController: navigationController,
           injector: dependency.injector
         )
-      let homeCoordinator = HomeCoodinator(dependency: dependency)
-        childCoodinators.append(homeCoordinator)
+      let tabBarCoordinator = TabBarCoordinator(dependency: dependency)
+        childCoodinators.append(tabBarCoordinator)
     }
     
     func getChildCoordinator(_ type: CoordinatorType) -> Coodinator? {
         var childCoordinator: Coodinator? = nil
         
         switch type {
-        case .home:
+        case .tabBar:
             // childCoordinators 배열에서 MainCoordinator 타입의 첫 번째 인스턴스를 찾아 childCoordinator 변수에 할당
             // first(where:) 메서드는 주어진 조건을 만족하는 배열의 첫 번째 요소를 반환합니다. 여기서는 $0 is MainCoordinator 조건을 사용하여 배열 내의 요소 중 MainCoordinator 타입의 요소를 찾는다.
-            childCoordinator = childCoodinators.first(where: { $0 is HomeCoodinator})
+            childCoordinator = childCoodinators.first(where: { $0 is TabBarCoordinator})
         default:
             break
         }

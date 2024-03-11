@@ -24,6 +24,10 @@ class HomeCoodinator: Coodinator, CoordinatorFinishDelegate {
         self.navigationController = dependency.navigationController
     }
     
+    deinit {
+        debugPrint("deinit: \(self)")
+    }
+    
     // start 메서드를 통해 MainView를 띄운다.
     func start() {
         let vc = dependency.injector.resolve(ViewController.self)
@@ -33,7 +37,7 @@ class HomeCoodinator: Coodinator, CoordinatorFinishDelegate {
 
     func showSecond(productId: Int) {
         let dependency = SecondViewCoodinator.Dependency(
-          navigationController: navigationController,
+            navigationController: dependency.navigationController,
           injector: dependency.injector
         )
         
