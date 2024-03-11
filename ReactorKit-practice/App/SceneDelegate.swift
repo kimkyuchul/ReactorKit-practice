@@ -26,7 +26,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         appCoodinator = DefaultAppCoodinator(dependency: .init(navigationController: navigationController, injector: injector))
         
         // Assembly 들을 모아서 앱 실행 시작 시점에 함께 등록
-        injector.assemble([HomeAssembly()])
+        injector.assemble([HomeTabAssembly()])
         appCoodinator?.start()
         
     }

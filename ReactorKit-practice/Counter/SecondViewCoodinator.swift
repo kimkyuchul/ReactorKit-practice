@@ -17,6 +17,7 @@ class SecondViewCoodinator: Coodinator {
     var type: CoordinatorType = .second
     weak var finishDelegate: CoordinatorFinishDelegate?
     var childCoodinators: [Coodinator] = []
+    var productId: Int?
     
     var navigationController: UINavigationController
     
@@ -30,9 +31,10 @@ class SecondViewCoodinator: Coodinator {
     }
     
     func start() {
-        let vc = SecondViewController()
-        vc.coordinator = self
-        navigationController.pushViewController(vc, animated: true)
+        guard let productId else { return }
+        let viewController = dependency.injector.resolve(SecondViewController.self, argument: productId)
+        viewController.coordinator = self
+        navigationController.pushViewController(viewController, animated: true)
     }
     
     func didFinish() {

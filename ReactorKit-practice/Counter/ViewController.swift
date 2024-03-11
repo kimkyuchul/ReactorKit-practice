@@ -74,7 +74,7 @@ final class ViewController: UIViewController, View {
         pushButton.rx.tap
             .asSignal()
             .emit(with: self) { owner, _ in
-                owner.coordinator?.showSecond()
+                owner.coordinator?.showSecond(productId: 1)
             }
             .disposed(by: disposeBag)
     }

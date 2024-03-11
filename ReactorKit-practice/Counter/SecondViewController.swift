@@ -13,6 +13,7 @@ import RxSwift
 final class SecondViewController: UIViewController {
     
     weak var coordinator: SecondViewCoodinator?
+    private let viewModel: SecondViewModel
     private let disposeBag = DisposeBag()
     
     private let dismissButton: UIButton = {
@@ -22,6 +23,15 @@ final class SecondViewController: UIViewController {
         return pushButton
     }()
     
+    init(viewModel: SecondViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemPink
@@ -29,11 +39,14 @@ final class SecondViewController: UIViewController {
         
         dismissButton.rx.tap.asSignal()
             .emit(with: self) { owner, _ in
-//                owner.coordinator?.finish()
-//                owner.navigationController?.dismiss(animated: false)
                 owner.coordinator?.didFinish()
             }
             .disposed(by: disposeBag)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        print(coordinator?.productId)
     }
     
     func setLayout() {
