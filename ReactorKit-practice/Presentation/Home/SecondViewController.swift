@@ -22,6 +22,13 @@ final class SecondViewController: UIViewController {
         pushButton.setTitle("dismissButtondismissButton", for: .normal)
         return pushButton
     }()
+    private let goLoginButton: UIButton = {
+        let pushButton = UIButton()
+        pushButton.translatesAutoresizingMaskIntoConstraints = false
+        pushButton.setTitle("goLoginButton", for: .normal)
+        return pushButton
+    }()
+    
     
     init(viewModel: SecondViewModel) {
         self.viewModel = viewModel
@@ -42,6 +49,12 @@ final class SecondViewController: UIViewController {
                 owner.coordinator?.didFinish()
             }
             .disposed(by: disposeBag)
+        
+        goLoginButton.rx.tap.asSignal()
+            .emit(with: self) { owner, _ in
+                owner.coordinator?.goToLogin()
+            }
+            .disposed(by: disposeBag)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -51,10 +64,14 @@ final class SecondViewController: UIViewController {
     
     func setLayout() {
         view.addSubview(dismissButton)
+        view.addSubview(goLoginButton)
         
         NSLayoutConstraint.activate([
             dismissButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            dismissButton.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+            dismissButton.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            
+            goLoginButton.topAnchor.constraint(equalTo: dismissButton.bottomAnchor, constant: 20),
+            goLoginButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
     }
 }

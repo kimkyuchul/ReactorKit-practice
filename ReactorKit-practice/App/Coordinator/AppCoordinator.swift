@@ -8,7 +8,7 @@
 import UIKit
 
 protocol AppCoordinator: Coodinator {
-    func showHomeFlow()
+    func showTabBarFlow()
     func showLoginFlow()
     func getChildCoordinator(_ type: CoordinatorType) -> Coodinator?
 }
@@ -28,6 +28,7 @@ final class DefaultAppCoodinator: AppCoordinator {
     init(dependency: Dependency) {
         self.dependency = dependency
         self.navigationController = dependency.navigationController
+        addTokenObserver()
     }
     
     deinit {
@@ -35,13 +36,22 @@ final class DefaultAppCoodinator: AppCoordinator {
     }
     
     func start() {
-        setHomeCoordinator()
-        showHomeFlow()
+        setTabBarCoordinator()
+        showTabBarFlow()
+        
+//        let isLoggedIn = UserDefaults.standard.bool(forKey: "isLoggedIn")
+//        switch isLoggedIn {
+//        case true:      
+//            setTabBarCoordinator()
+//            showTabBarFlow()
+//        case false:
+//            showLoginFlow()
+//        }
     }
     
     // 탭바 플로우
-    func showHomeFlow() {
-        if getChildCoordinator(.tabBar) == nil { setHomeCoordinator() }
+    func showTabBarFlow() {
+        if getChildCoordinator(.tabBar) == nil { setTabBarCoordinator() }
         let tabBarCoordinator = getChildCoordinator(.tabBar) as! TabBarCoordinator
         tabBarCoordinator.finishDelegate = self
         tabBarCoordinator.start()
@@ -49,15 +59,22 @@ final class DefaultAppCoodinator: AppCoordinator {
     
     // 로그인 플로우
     func showLoginFlow() {
-        
+        let dependency = LoginCoordinator.Dependency(
+            navigationController: navigationController,
+            injector: dependency.injector
+        )
+        let loginCoordinator = LoginCoordinator(dependency: dependency)
+        childCoodinators.append(loginCoordinator)
+        loginCoordinator.finishDelegate = self
+        loginCoordinator.start()
     }
     
-    func setHomeCoordinator() {
+    func setTabBarCoordinator() {
         let dependency = TabBarCoordinator.Dependency(
-          navigationController: navigationController,
-          injector: dependency.injector
+            navigationController: navigationController,
+            injector: dependency.injector
         )
-      let tabBarCoordinator = TabBarCoordinator(dependency: dependency)
+        let tabBarCoordinator = TabBarCoordinator(dependency: dependency)
         childCoodinators.append(tabBarCoordinator)
     }
     
@@ -80,3 +97,18 @@ final class DefaultAppCoodinator: AppCoordinator {
 // 자식 코디네이터가 종료되었을 때 실행할 메서드
 extension DefaultAppCoodinator: CoordinatorFinishDelegate {}
 
+private extension DefaultAppCoodinator {
+  // MARK: Methods
+  func addTokenObserver() {
+      NotificationCenter.default.addObserver(
+          self,
+          selector: #selector(resetWhenLogout),
+          name: .logout,
+          object: nil
+      )
+  }
+
+    @objc private func resetWhenLogout() {
+    showLoginFlow() 
+  }
+}

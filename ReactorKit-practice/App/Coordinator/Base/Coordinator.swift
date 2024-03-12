@@ -8,7 +8,7 @@
 import UIKit
 
 enum CoordinatorType {
-    case app, tabBar
+    case app, tabBar, login
     case home, second
     case search
 }

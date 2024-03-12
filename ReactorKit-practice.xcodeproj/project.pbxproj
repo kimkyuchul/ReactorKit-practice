@@ -37,6 +37,10 @@
 		22F3EDEA2B9EDD5B00A05A7F /* SearchCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F3EDE92B9EDD5B00A05A7F /* SearchCoordinator.swift */; };
 		22F3EDEC2B9EDD6300A05A7F /* SearchViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F3EDEB2B9EDD6300A05A7F /* SearchViewReactor.swift */; };
 		22F3EDEF2B9EE61500A05A7F /* SearchAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F3EDEE2B9EE61500A05A7F /* SearchAssembly.swift */; };
+		22F3EDF42B9EEF5300A05A7F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F3EDF32B9EEF5300A05A7F /* LoginViewController.swift */; };
+		22F3EDF62B9EEF9600A05A7F /* LoginViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F3EDF52B9EEF9600A05A7F /* LoginViewReactor.swift */; };
+		22F3EDF92B9EF03D00A05A7F /* LoginAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F3EDF82B9EF03D00A05A7F /* LoginAssembly.swift */; };
+		22F3EDFB2B9EF1CB00A05A7F /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F3EDFA2B9EF1CB00A05A7F /* LoginCoordinator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +89,10 @@
 		22F3EDE92B9EDD5B00A05A7F /* SearchCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCoordinator.swift; sourceTree = "<group>"; };
 		22F3EDEB2B9EDD6300A05A7F /* SearchViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewReactor.swift; sourceTree = "<group>"; };
 		22F3EDEE2B9EE61500A05A7F /* SearchAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAssembly.swift; sourceTree = "<group>"; };
+		22F3EDF32B9EEF5300A05A7F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		22F3EDF52B9EEF9600A05A7F /* LoginViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewReactor.swift; sourceTree = "<group>"; };
+		22F3EDF82B9EF03D00A05A7F /* LoginAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginAssembly.swift; sourceTree = "<group>"; };
+		22F3EDFA2B9EF1CB00A05A7F /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +140,7 @@
 		220A5B482B9AD5980029D018 /* DI */ = {
 			isa = PBXGroup;
 			children = (
+				22F3EDF72B9EF02C00A05A7F /* Auth */,
 				22F3EDE02B9EAF7600A05A7F /* Home */,
 				22F3EDED2B9EE5FE00A05A7F /* Search */,
 				220A5B492B9AD5B00029D018 /* DependencyInjector.swift */,
@@ -181,9 +190,8 @@
 			isa = PBXGroup;
 			children = (
 				220A5B3E2B9AAC190029D018 /* App */,
+				22F3EDF02B9EEAC200A05A7F /* Common */,
 				22F3EDE42B9EDC1E00A05A7F /* Presentation */,
-				22DD3B2A2B6F8709004C6768 /* Assets.xcassets */,
-				22DD3B2C2B6F8709004C6768 /* LaunchScreen.storyboard */,
 				22DD3B2F2B6F8709004C6768 /* Info.plist */,
 			);
 			path = "ReactorKit-practice";
@@ -232,6 +240,7 @@
 		22F3EDE42B9EDC1E00A05A7F /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				22F3EDF22B9EEF4100A05A7F /* Auth */,
 				22DD3B5F2B6F9769004C6768 /* Home */,
 				22F3EDE62B9EDC4300A05A7F /* Search */,
 			);
@@ -254,6 +263,41 @@
 				22F3EDEE2B9EE61500A05A7F /* SearchAssembly.swift */,
 			);
 			path = Search;
+			sourceTree = "<group>";
+		};
+		22F3EDF02B9EEAC200A05A7F /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				22F3EDF12B9EEAC900A05A7F /* Resource */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		22F3EDF12B9EEAC900A05A7F /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				22DD3B2A2B6F8709004C6768 /* Assets.xcassets */,
+				22DD3B2C2B6F8709004C6768 /* LaunchScreen.storyboard */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		22F3EDF22B9EEF4100A05A7F /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				22F3EDF32B9EEF5300A05A7F /* LoginViewController.swift */,
+				22F3EDF52B9EEF9600A05A7F /* LoginViewReactor.swift */,
+				22F3EDFA2B9EF1CB00A05A7F /* LoginCoordinator.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		22F3EDF72B9EF02C00A05A7F /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				22F3EDF82B9EF03D00A05A7F /* LoginAssembly.swift */,
+			);
+			path = Auth;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -407,8 +451,11 @@
 				220A5B422B9AB00B0029D018 /* SecondViewController.swift in Sources */,
 				22F3EDEC2B9EDD6300A05A7F /* SearchViewReactor.swift in Sources */,
 				22F3EDDF2B9EAA3100A05A7F /* SecondAssembly.swift in Sources */,
+				22F3EDF62B9EEF9600A05A7F /* LoginViewReactor.swift in Sources */,
+				22F3EDF42B9EEF5300A05A7F /* LoginViewController.swift in Sources */,
 				22F3EDEF2B9EE61500A05A7F /* SearchAssembly.swift in Sources */,
 				22DD3B262B6F8708004C6768 /* ViewController.swift in Sources */,
+				22F3EDFB2B9EF1CB00A05A7F /* LoginCoordinator.swift in Sources */,
 				22F3EDDD2B9EA7F800A05A7F /* SecondViewModel.swift in Sources */,
 				220A5B512B9AE1E70029D018 /* TabBarCoordinator.swift in Sources */,
 				22F3EDE82B9EDD5200A05A7F /* SearchViewController.swift in Sources */,
@@ -418,6 +465,7 @@
 				22DD3B242B6F8708004C6768 /* SceneDelegate.swift in Sources */,
 				22F3EDEA2B9EDD5B00A05A7F /* SearchCoordinator.swift in Sources */,
 				22DD3B552B6F8D2B004C6768 /* ViewReactor.swift in Sources */,
+				22F3EDF92B9EF03D00A05A7F /* LoginAssembly.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

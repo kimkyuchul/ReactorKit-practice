@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SecondViewCoodinator: Coodinator {
+final class SecondViewCoodinator: Coodinator {
     struct Dependency {
         let navigationController: UINavigationController
         let injector: Injector
@@ -22,9 +22,9 @@ class SecondViewCoodinator: Coodinator {
     var navigationController: UINavigationController
     
     init(dependency: Dependency) {
-         self.dependency = dependency
-         self.navigationController = dependency.navigationController
-     }
+        self.dependency = dependency
+        self.navigationController = dependency.navigationController
+    }
     
     deinit {
         debugPrint("deinit: \(self)")
@@ -38,7 +38,17 @@ class SecondViewCoodinator: Coodinator {
     }
     
     func didFinish() {
-      finish()
-      navigationController.popViewController(animated: true)
+        finish()
+        navigationController.popViewController(animated: true)
     }
+    
+    func goToLogin() {
+        finish()
+        NotificationCenter.default.post(name: .logout, object: nil)
+    }
+}
+
+public extension Notification.Name {
+    static let accessTokenDidExpired = Notification.Name("accessTokenDidExpired")
+    static let logout = Notification.Name("logout")
 }

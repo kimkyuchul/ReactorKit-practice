@@ -27,7 +27,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         // Assembly 들을 모아서 앱 실행 시작 시점에 함께 등록
         injector.assemble([HomeTabAssembly(),
-                           SearchAssembly()
+                           SearchAssembly(),
+                           LoginAssembly()
                           ])
         appCoodinator?.start()
     }

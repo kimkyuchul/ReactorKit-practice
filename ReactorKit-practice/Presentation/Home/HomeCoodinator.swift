@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HomeCoodinator: Coodinator, CoordinatorFinishDelegate {
+final class HomeCoodinator: Coodinator, CoordinatorFinishDelegate {
     struct Dependency {
         let navigationController: UINavigationController
         let injector: Injector
