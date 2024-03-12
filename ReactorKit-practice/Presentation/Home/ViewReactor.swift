@@ -26,12 +26,14 @@ final class ViewReactor: Reactor {
         case increaseValue
         case decreaseValue
         case setLoading(Bool)
+        case setAlertMessage(String)
     }
     
     // 현재 상태를 기록하고 있으며, View에서 해당 정보를 사용하여 UI업데이트 및 Reactor에서 image를 얻어올때 page정보들을 저장
     struct State {
           var value = 0
           var isLoading = false
+        @Pulse var alertMessage: String?
       }
     
     // Action이 들어온 경우, 어떤 처리를 할건지 분기
@@ -43,13 +45,15 @@ final class ViewReactor: Reactor {
             return Observable.concat(([
                 Observable.just(.setLoading(true)),
                 Observable.just(.increaseValue),
-                Observable.just(.setLoading(false))
+                Observable.just(.setLoading(false)),
+                Observable.just(.setAlertMessage("Increased!"))
             ]))
         case .decrease:
             return Observable.concat([
                 Observable.just(.setLoading(true)),
                 Observable.just(.decreaseValue).delay(.seconds(1), scheduler: MainScheduler.instance),
-                Observable.just(.setLoading(false))
+                Observable.just(.setLoading(false)),
+                Observable.just(.setAlertMessage("Decreased!"))
             ])
         }
     }
@@ -65,6 +69,8 @@ final class ViewReactor: Reactor {
             newState.value -= 1
         case .setLoading(let bool):
             newState.isLoading = bool
+        case .setAlertMessage(let message):
+            newState.alertMessage = message
         }
         return newState
     }

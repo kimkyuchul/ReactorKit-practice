@@ -29,6 +29,18 @@ final class ViewController: UIViewController, View {
         increaseButton.setTitle("Increase", for: .normal)
         return increaseButton
     }()
+    private let decreaseButton: UIButton = {
+        let increaseButton = UIButton()
+        increaseButton.translatesAutoresizingMaskIntoConstraints = false
+        increaseButton.setTitle("Decrease", for: .normal)
+        return increaseButton
+    }()
+    private let indicatorView: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: .large)
+        indicator.tintColor = .systemPink
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        return indicator
+    }()
     private let pushButton: UIButton = {
         let pushButton = UIButton()
         pushButton.translatesAutoresizingMaskIntoConstraints = false
@@ -54,17 +66,13 @@ final class ViewController: UIViewController, View {
     }
     
     private func bindAction(_ reactor: ViewReactor) {
-        let tap = increaseButton.rx.tap
-            .share()
-        
-        tap
-            .bind { _ in
-                dump("tap")
-            }
+        increaseButton.rx.tap
+            .map { Reactor.Action.increase }
+            .bind(to: reactor.action)
             .disposed(by: disposeBag)
         
-        tap
-            .map { Reactor.Action.increase }
+        decreaseButton.rx.tap
+            .map { Reactor.Action.decrease }
             .bind(to: reactor.action)
             .disposed(by: disposeBag)
         
@@ -83,11 +91,42 @@ final class ViewController: UIViewController, View {
             .asDriver(onErrorJustReturn: "")
             .drive(countLabel.rx.text)
             .disposed(by: disposeBag)
+        
+        reactor.state
+            .map { $0.isLoading }
+            .distinctUntilChanged()
+            .asDriver(onErrorJustReturn: false)
+            .drive(indicatorView.rx.isAnimating, indicatorView.rx.isHidden)
+            .disposed(by: disposeBag)
+        
+        // 위에서 State 이벤트는 값이 변하든 안 변하든 상관없이, 이벤트가 항상 오는 것을 확인
+        // 하지만 Pulse property wrapper를 사용하면 값이 새롭게 할당(assign) 되는 상황에만 이벤트가 발생한다는 것
+        // State 이벤트 받을 때 distinctUntilChanged를 사용 안 하면 Pulse property wrapper랑 똑같이 동작 => X
+        // distinctUntilChanged를 사용하지 않았을 때 State의 특정 프로퍼티가 값이 변하거나 새로 할당될 때만 이벤트가 오는 것이 아니다. 다른 프로퍼티의 값이 바뀌게 되는 경우에도 이벤트가 오기 때문
+        //  Pulse property wrapper를 사용하게 되면, 특정 프로퍼티에 값이 새로 할당되는 경우에만 이벤트가 발생하기 때문에, 다른 프로퍼티 값이 바뀌어도 이벤트가 오지 않는 것
+        reactor.pulse(\.$alertMessage)
+            .debug()
+            .bind(with: self) { owner, message in
+                let alertController = UIAlertController(
+                       title: nil,
+                       message: message,
+                       preferredStyle: .alert
+                   )
+                   alertController.addAction(UIAlertAction(
+                       title: "OK",
+                       style: .default,
+                       handler: nil
+                   ))
+                owner.present(alertController, animated: true)
+            }
+            .disposed(by: disposeBag)
     }
     
     func setLayout() {
         view.addSubview(countLabel)
         view.addSubview(increaseButton)
+        view.addSubview(decreaseButton)
+        view.addSubview(indicatorView)
         view.addSubview(pushButton)
         
         NSLayoutConstraint.activate([
@@ -96,8 +135,14 @@ final class ViewController: UIViewController, View {
             increaseButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             increaseButton.topAnchor.constraint(equalTo: countLabel.bottomAnchor, constant: 20),
             
+            decreaseButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            decreaseButton.topAnchor.constraint(equalTo: increaseButton.bottomAnchor, constant: 20),
+            
+            indicatorView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            indicatorView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            
             pushButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            pushButton.topAnchor.constraint(equalTo: increaseButton.bottomAnchor, constant: 20)
+            pushButton.topAnchor.constraint(equalTo: decreaseButton.bottomAnchor, constant: 20)
         ])
     }
 }
