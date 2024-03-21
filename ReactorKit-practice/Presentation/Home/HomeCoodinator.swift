@@ -7,6 +7,11 @@
 
 import UIKit
 
+protocol HomeCoodinatorInterface: AnyObject {
+    func pushThirdView(argument: Int)
+    func pop()
+}
+
 final class HomeCoodinator: Coodinator, CoordinatorFinishDelegate {
     struct Dependency {
         let navigationController: UINavigationController
@@ -19,7 +24,7 @@ final class HomeCoodinator: Coodinator, CoordinatorFinishDelegate {
     var navigationController: UINavigationController
     weak var finishDelegate: CoordinatorFinishDelegate?
     
-   init(dependency: Dependency) {
+    init(dependency: Dependency) {
         self.dependency = dependency
         self.navigationController = dependency.navigationController
     }
@@ -34,18 +39,37 @@ final class HomeCoodinator: Coodinator, CoordinatorFinishDelegate {
         vc.coordinator = self
         navigationController.pushViewController(vc, animated: true)
     }
-
+    
     func showSecond(productId: Int) {
         let dependency = SecondViewCoodinator.Dependency(
             navigationController: dependency.navigationController,
-          injector: dependency.injector
+            injector: dependency.injector
         )
         
-      let secondCoordinator = SecondViewCoodinator(dependency: dependency)
+        let secondCoordinator = SecondViewCoodinator(dependency: dependency)
         childCoodinators.append(secondCoordinator)
         secondCoordinator.finishDelegate = self
         secondCoordinator.productId = productId
         secondCoordinator.start()
+    }
+    
+    func printStack() {
+        let viewControllers = navigationController.viewControllers
+        for (index, viewController) in viewControllers.enumerated() {
+            print("\(index): \(Swift.type(of: viewController))")
+        }
+    }
+
+    func pop() {
+        navigationController.popViewController(animated: true)
+    }
+}
+
+extension HomeCoodinator: HomeCoodinatorInterface {
+    func pushThirdView(argument: Int) {
+        let vc = dependency.injector.resolve(ThirdViewController.self, argument: argument)
+        vc.coordinator = self
+        navigationController.pushViewController(vc, animated: true)
     }
 }
 

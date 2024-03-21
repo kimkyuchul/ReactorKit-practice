@@ -31,6 +31,10 @@ final class LoginCoordinator: Coodinator, CoordinatorFinishDelegate {
         changeRoot(navigationController)
     }
     
+    func gotoMain() {
+        finish()
+    }
+    
     private func changeRoot(_ rootVC: UIViewController, duration: TimeInterval = 1.1) {
         let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
         let sceneDelegate = windowScene?.delegate as? SceneDelegate

@@ -95,7 +95,17 @@ final class DefaultAppCoodinator: AppCoordinator {
 }
 
 // 자식 코디네이터가 종료되었을 때 실행할 메서드
-extension DefaultAppCoodinator: CoordinatorFinishDelegate {}
+extension DefaultAppCoodinator: CoordinatorFinishDelegate {
+    func coordinatorDidFinish(childCoordinator: Coodinator) {
+        childCoodinators = childCoodinators.filter { $0.type != childCoordinator.type }
+        switch childCoordinator.type {
+        case .login:
+            showTabBarFlow()
+        default:
+            break
+        }
+    }
+}
 
 private extension DefaultAppCoodinator {
   // MARK: Methods
@@ -109,6 +119,7 @@ private extension DefaultAppCoodinator {
   }
 
     @objc private func resetWhenLogout() {
-    showLoginFlow() 
+    print("resetWhenLogout")
+    showLoginFlow()
   }
 }

@@ -31,7 +31,6 @@
 		22DD3B5C2B6F8FE3004C6768 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 22DD3B5B2B6F8FE3004C6768 /* RxRelay */; };
 		22DD3B5E2B6F8FE3004C6768 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 22DD3B5D2B6F8FE3004C6768 /* RxSwift */; };
 		22F3EDDD2B9EA7F800A05A7F /* SecondViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F3EDDC2B9EA7F800A05A7F /* SecondViewModel.swift */; };
-		22F3EDDF2B9EAA3100A05A7F /* SecondAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F3EDDE2B9EAA3100A05A7F /* SecondAssembly.swift */; };
 		22F3EDE32B9EB0B600A05A7F /* HomeTabAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F3EDE22B9EB0B600A05A7F /* HomeTabAssembly.swift */; };
 		22F3EDE82B9EDD5200A05A7F /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F3EDE72B9EDD5200A05A7F /* SearchViewController.swift */; };
 		22F3EDEA2B9EDD5B00A05A7F /* SearchCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F3EDE92B9EDD5B00A05A7F /* SearchCoordinator.swift */; };
@@ -41,6 +40,8 @@
 		22F3EDF62B9EEF9600A05A7F /* LoginViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F3EDF52B9EEF9600A05A7F /* LoginViewReactor.swift */; };
 		22F3EDF92B9EF03D00A05A7F /* LoginAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F3EDF82B9EF03D00A05A7F /* LoginAssembly.swift */; };
 		22F3EDFB2B9EF1CB00A05A7F /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F3EDFA2B9EF1CB00A05A7F /* LoginCoordinator.swift */; };
+		22F4A2C92BABCE82006C78F0 /* ThirdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F4A2C82BABCE82006C78F0 /* ThirdViewController.swift */; };
+		22F4A2CB2BABCFE4006C78F0 /* ThirdViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F4A2CA2BABCFE4006C78F0 /* ThirdViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,7 +84,6 @@
 		22DD3B442B6F8709004C6768 /* ReactorKit_practiceUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactorKit_practiceUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		22DD3B542B6F8D2B004C6768 /* ViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewReactor.swift; sourceTree = "<group>"; };
 		22F3EDDC2B9EA7F800A05A7F /* SecondViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewModel.swift; sourceTree = "<group>"; };
-		22F3EDDE2B9EAA3100A05A7F /* SecondAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondAssembly.swift; sourceTree = "<group>"; };
 		22F3EDE22B9EB0B600A05A7F /* HomeTabAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabAssembly.swift; sourceTree = "<group>"; };
 		22F3EDE72B9EDD5200A05A7F /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		22F3EDE92B9EDD5B00A05A7F /* SearchCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCoordinator.swift; sourceTree = "<group>"; };
@@ -93,6 +93,8 @@
 		22F3EDF52B9EEF9600A05A7F /* LoginViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewReactor.swift; sourceTree = "<group>"; };
 		22F3EDF82B9EF03D00A05A7F /* LoginAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginAssembly.swift; sourceTree = "<group>"; };
 		22F3EDFA2B9EF1CB00A05A7F /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
+		22F4A2C82BABCE82006C78F0 /* ThirdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdViewController.swift; sourceTree = "<group>"; };
+		22F4A2CA2BABCFE4006C78F0 /* ThirdViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -223,6 +225,8 @@
 				220A5B412B9AB00B0029D018 /* SecondViewController.swift */,
 				22F3EDDC2B9EA7F800A05A7F /* SecondViewModel.swift */,
 				220A5B432B9AB1290029D018 /* SecondViewCoodinator.swift */,
+				22F4A2C82BABCE82006C78F0 /* ThirdViewController.swift */,
+				22F4A2CA2BABCFE4006C78F0 /* ThirdViewModel.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -232,7 +236,6 @@
 			children = (
 				22F3EDE22B9EB0B600A05A7F /* HomeTabAssembly.swift */,
 				220A5B4B2B9ADB730029D018 /* HomeAssembly.swift */,
-				22F3EDDE2B9EAA3100A05A7F /* SecondAssembly.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -449,14 +452,15 @@
 				220A5B4F2B9AE1DD0029D018 /* AppCoordinator.swift in Sources */,
 				220A5B442B9AB1290029D018 /* SecondViewCoodinator.swift in Sources */,
 				220A5B422B9AB00B0029D018 /* SecondViewController.swift in Sources */,
+				22F4A2CB2BABCFE4006C78F0 /* ThirdViewModel.swift in Sources */,
 				22F3EDEC2B9EDD6300A05A7F /* SearchViewReactor.swift in Sources */,
-				22F3EDDF2B9EAA3100A05A7F /* SecondAssembly.swift in Sources */,
 				22F3EDF62B9EEF9600A05A7F /* LoginViewReactor.swift in Sources */,
 				22F3EDF42B9EEF5300A05A7F /* LoginViewController.swift in Sources */,
 				22F3EDEF2B9EE61500A05A7F /* SearchAssembly.swift in Sources */,
 				22DD3B262B6F8708004C6768 /* ViewController.swift in Sources */,
 				22F3EDFB2B9EF1CB00A05A7F /* LoginCoordinator.swift in Sources */,
 				22F3EDDD2B9EA7F800A05A7F /* SecondViewModel.swift in Sources */,
+				22F4A2C92BABCE82006C78F0 /* ThirdViewController.swift in Sources */,
 				220A5B512B9AE1E70029D018 /* TabBarCoordinator.swift in Sources */,
 				22F3EDE82B9EDD5200A05A7F /* SearchViewController.swift in Sources */,
 				220A5B402B9AAC360029D018 /* HomeCoodinator.swift in Sources */,

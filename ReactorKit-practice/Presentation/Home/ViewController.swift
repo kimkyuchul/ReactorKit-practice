@@ -47,15 +47,23 @@ final class ViewController: UIViewController, View {
         pushButton.setTitle("gogogo", for: .normal)
         return pushButton
     }()
+    private let justNavPushButton: UIButton = {
+        let pushButton = UIButton()
+        pushButton.translatesAutoresizingMaskIntoConstraints = false
+        pushButton.setTitle("justNavPush", for: .normal)
+        return pushButton
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemMint
         setLayout()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        coordinator?.printStack()
     }
     
     // Reactor에 View의 Action을 미리 정의해놓고, 해당 action을 처리하여 다시 View에 State값을 넘기는 것
@@ -82,6 +90,13 @@ final class ViewController: UIViewController, View {
                 owner.coordinator?.showSecond(productId: 1)
             }
             .disposed(by: disposeBag)
+        
+        justNavPushButton.rx.tap
+            .asSignal()
+            .emit(with: self) { owner, _ in
+                owner.coordinator?.pushThirdView(argument: 1231)
+            }
+            .disposed(by: disposeBag)
     }
     
     private func bindState(_ reactor: ViewReactor) {
@@ -94,6 +109,7 @@ final class ViewController: UIViewController, View {
         
         reactor.state
             .map { $0.isLoading }
+            .debug() // Event next(true) 2번, Event next(false) 2번 발생
             .distinctUntilChanged()
             .asDriver(onErrorJustReturn: false)
             .drive(indicatorView.rx.isAnimating, indicatorView.rx.isHidden)
@@ -128,6 +144,7 @@ final class ViewController: UIViewController, View {
         view.addSubview(decreaseButton)
         view.addSubview(indicatorView)
         view.addSubview(pushButton)
+        view.addSubview(justNavPushButton)
         
         NSLayoutConstraint.activate([
             countLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -142,7 +159,11 @@ final class ViewController: UIViewController, View {
             indicatorView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             
             pushButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            pushButton.topAnchor.constraint(equalTo: decreaseButton.bottomAnchor, constant: 20)
+            pushButton.topAnchor.constraint(equalTo: decreaseButton.bottomAnchor, constant: 20),
+            
+            justNavPushButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            justNavPushButton.topAnchor.constraint(equalTo: pushButton.bottomAnchor, constant: 20)
+            
         ])
     }
 }

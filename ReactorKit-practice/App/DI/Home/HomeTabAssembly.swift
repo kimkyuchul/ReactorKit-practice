@@ -9,7 +9,11 @@ import Swinject
 
 struct HomeTabAssembly: Assembly {
     func assemble(container: Container) {
-        let assemblys: [Assembly] = [HomeAssembly(), SecondAssembly()]
+        let assemblys: [Assembly] = [
+            HomeAssembly(),
+            SecondAssembly(),
+            ThirdAssembly()
+        ]
         assemblys.forEach { $0.assemble(container: container) }
     }
 }
